@@ -38,7 +38,7 @@ export class CanvasObject {
     const gridHelper = new THREE.GridHelper(100, 20);
     this.scene.add(gridHelper);
 
-    this.controls.target.set(0, 20, 0);
+    this.controls.target.set(0, 50, 0);
     this.controls.update();
 
     this.updateCanvasSize();
@@ -55,8 +55,9 @@ export class CanvasObject {
     for (const object of this.objects) {
       // object.animate();
     }
-    this.controls.update();
+    
     this.renderer.render(this.scene, this.camera);
+    this.controls.update();
   }
 
   onWindowResize() {

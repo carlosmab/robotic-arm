@@ -6,25 +6,33 @@ export class LowerArm extends Segment {
   constructor(color: number) {
     super();
 
-    const jointCylinder = createCylinder(3, 12, color);
+    const jointCylinder = createCylinder(4, 3, color);
+    const jointCylinder2 = jointCylinder.clone();
+    const jointCylinder3 =  createCylinder(5, 3, color);
+
+    jointCylinder.position.x = 4
     jointCylinder.rotation.z = Math.PI / 2;
     jointCylinder.position.y = - 10;
+
+    jointCylinder2.position.x = - 4
+    jointCylinder2.rotation.z = Math.PI / 2;
+    jointCylinder2.position.y = - 10;
+
+    jointCylinder3.rotation.z = Math.PI / 2;
+    jointCylinder3.position.y = - 10;
 
     const axisCylinder = createCylinder(1, 14, color, true);
     axisCylinder.rotation.z = Math.PI / 2;
     axisCylinder.position.y = - 10;
 
-    const LateralCylinder = createCylinder(0.8, 20, 0xaaaaaa, true);
-    const LateralCylinder2 = LateralCylinder.clone();
-    LateralCylinder.position.x = 2
-    LateralCylinder2.position.x = - 2;
-    
-
+    const LateralCylinder = createCylinder(1.2, 25, 0xaaaaaa, true);
+  
     this.add(jointCylinder);
+    this.add(jointCylinder2);
+    this.add(jointCylinder3);
     this.add(axisCylinder);
     this.add(LateralCylinder);
-    this.add(LateralCylinder2);
-
+ 
     this.position.y = 54.5;
   }
 
