@@ -2,6 +2,8 @@
 import { ref, onMounted } from 'vue';
 import { CanvasObject } from '../module-3D/canvas/canvas-object';
 import { RobotBase } from '../module-3D/segments/robot-base';
+import { UpperArm } from '../module-3D/segments/upper-arm';
+import { LowerArm } from '../module-3D/segments/lower-arm';
 
 const canvasContainerRef = ref<HTMLElement | null>(null);
 const canvasRef = ref<HTMLCanvasElement | null>(null);
@@ -30,11 +32,15 @@ onMounted(() => {
   window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
 
-  const robotBase = new RobotBase();
+  const robotBase = new RobotBase(0xaaaaee);
+  const upperArm = new UpperArm(0xaaaaee);
+  const lowerArm = new LowerArm(0xaaaaee);
 
   canvasObject = new CanvasObject(canvas);
   canvasObject.start();
   canvasObject.addObject(robotBase);
+  canvasObject.addObject(upperArm);
+  canvasObject.addObject(lowerArm);
 });
 
 
