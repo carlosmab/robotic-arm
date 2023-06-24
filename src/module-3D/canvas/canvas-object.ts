@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { Segment } from '../segments/segment';
-import { OrbitControls } from '../../jsm/controls/OrbitControls.js';
+import { OrbitControls } from 'three-orbitcontrols-ts';
 
 export class CanvasObject {
   canvas: HTMLCanvasElement;
