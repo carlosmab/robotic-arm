@@ -1,5 +1,5 @@
 import { Segment } from './segment';
-import { createCylinder } from '../utils/create-objects';
+import { createBox, createCylinder } from '../utils/create-objects';
 
 export class Grip extends Segment {
 
@@ -17,9 +17,24 @@ export class Grip extends Segment {
     axisCylinder.rotation.z = Math.PI / 2;
     axisCylinder.position.y = - 3;
 
+    const gripBox1 = createBox(15, 3, 3, color);
+    gripBox1.position.y = 5;
+
+    const gripBox2 = createBox(1, 10, 3, color);
+    gripBox2.position.y = 10;
+    gripBox2.position.x = 5;
+    const gripBox3 = createBox(1, 10, 3, color);
+    gripBox3.position.x = -5;
+    gripBox3.position.y = 10;
+
+
     this.add(jointCylinder);
     this.add(LateralCylinder);
     this.add(axisCylinder);
+    this.add(gripBox1);
+    this.add(gripBox2);
+    this.add(gripBox3);
+
  
     this.position.y = 72.5;
   }
