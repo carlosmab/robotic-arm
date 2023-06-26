@@ -2,7 +2,6 @@ import * as THREE from 'three';
 
 export abstract class Segment extends THREE.Object3D {
   abstract longitude: number;
-
   abstract animate(position: number, rotation: number): void;
 
   rotate = (rotation: number, offsetX: number = 0, offsetY: number = 0) =>{

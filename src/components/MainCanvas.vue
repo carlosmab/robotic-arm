@@ -50,23 +50,23 @@ onMounted(() => {
 });
 
 
-watch(() => rotationStore.baseRotation, () => {
-  let angle = rotationStore.baseRotation * Math.PI / 180;
+watch(() => rotationStore.baseRotation,( baseRotation) => {
+  let angle = baseRotation * Math.PI / 180;
   robotBase.rotation.y = angle;
 });
 
-watch(() => rotationStore.upperArmRotation, () => {
-  let angle = rotationStore.upperArmRotation * Math.PI / 180;
+watch(() => rotationStore.upperArmRotation, (upperArmRotation) => {
+  let angle = upperArmRotation * Math.PI / 180;
   upperArm.rotate(angle);
 });
 
-watch(() => rotationStore.lowerArmRotation, () => {
-  let angle = rotationStore.lowerArmRotation * Math.PI / 180;
+watch(() => rotationStore.lowerArmRotation, (lowerArmRotation) => {
+  let angle = lowerArmRotation * Math.PI / 180;
   lowerArm.rotate(angle);
 });
 
-watch(() => rotationStore.gripRotation, () => {
-  let angle = rotationStore.gripRotation * Math.PI / 180;
+watch(() => rotationStore.gripRotation, (gripRotation) => {
+  let angle = gripRotation * Math.PI / 180;
   grip.rotate(angle);
 });
 
