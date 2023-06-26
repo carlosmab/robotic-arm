@@ -36,6 +36,8 @@ onMounted(() => {
   }
 
   window.addEventListener('resize', resizeCanvas);
+  window.addEventListener('keydown', handleKeyDown);
+  canvas.addEventListener('mousemove', handleMouseMove);
   resizeCanvas();
 
   robotBase.addChild(upperArm);
@@ -45,10 +47,6 @@ onMounted(() => {
   canvasObject = new CanvasObject(canvas);
   canvasObject.start();
   canvasObject.addObject(robotBase);
-  // canvasObject.addObject(upperArm);
-  // canvasObject.addObject(lowerArm);
-  // canvasObject.addObject(grip);
-
 });
 
 
@@ -71,6 +69,53 @@ watch(() => rotationStore.gripRotation, () => {
   let angle = rotationStore.gripRotation * Math.PI / 180;
   grip.rotate(angle);
 });
+
+const handleKeyDown = (event: KeyboardEvent) => {
+  event.preventDefault();
+  switch (event.key) {
+    case 'ArrowUp':
+      rotationStore.baseRotation += 1;
+      break;
+    case 'ArrowDown':
+      rotationStore.baseRotation -= 1;
+      break;
+    case 'ArrowLeft':
+      rotationStore.upperArmRotation += 1;
+      break;
+    case 'ArrowRight':
+      rotationStore.upperArmRotation -= 1;
+      break;
+    case 'a':
+      rotationStore.lowerArmRotation += 2;
+      break;
+    case 'd':
+      rotationStore.lowerArmRotation -= 2;
+      break;
+    case 's':
+      rotationStore.gripRotation += 2;
+      break;
+    case 'w':
+      rotationStore.gripRotation -= 2;
+      break;
+  }
+};
+
+const handleMouseMove = (event: MouseEvent) => {
+  const canvas = canvasRef.value;
+  const canvasRect: DOMRect = canvas!.getBoundingClientRect();
+  const mouseX = event.clientX - canvasRect.left;
+  const mouseY = event.clientY - canvasRect.top;
+
+  const canvasWidth = canvas!.clientWidth;
+  const normalizedX = (mouseX / canvasWidth) * 22.5; 
+
+  const canvasHeight = canvas!.clientHeight;
+  const normalizedY = (mouseY / canvasHeight) * 22.5; 
+  const maxRotation = Math.PI * 2; 
+
+  rotationStore.baseRotation = maxRotation * normalizedX;
+  rotationStore.lowerArmRotation = maxRotation * normalizedY + Math.PI / 3;
+};
 
 
 </script>

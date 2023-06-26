@@ -43,9 +43,9 @@ watch(
 <style scoped>
 .control-panel {
   position: fixed;
-  top: 100px;
-  left: 100px;
-  background-color: rgba(0, 0, 0, 0.5);
+  bottom: 100px;
+  right: 100px;
+  background-color: rgba(0, 0, 0, 0.3);
   padding: 10px;
   color: white;
 }
