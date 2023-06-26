@@ -2,6 +2,8 @@ import { Segment } from './segment';
 import { createBox, createCylinder } from '../utils/create-objects';
 
 export class RobotBase extends Segment {
+  longitude: number = 16.5;
+  lowerY: number= 0;
 
   constructor(color: number) {
     super();
@@ -30,6 +32,7 @@ export class RobotBase extends Segment {
   animate(position: number, rotation: number) {
     
   }
+
 }
 
 

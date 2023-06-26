@@ -1,14 +1,19 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { CanvasObject } from '../module-3D/canvas/canvas-object';
 import { RobotBase } from '../module-3D/segments/robot-base';
 import { UpperArm } from '../module-3D/segments/upper-arm';
 import { LowerArm } from '../module-3D/segments/lower-arm';
 import { Grip } from '../module-3D/segments/grip';
+import { rotationStore } from '../store/rotationStore';
 
 const canvasContainerRef = ref<HTMLElement | null>(null);
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 let canvasObject: CanvasObject | null = null;
+let robotBase: RobotBase = new RobotBase(0xaaaaee);
+let upperArm: UpperArm = new UpperArm(0xaaaaee);
+let lowerArm: LowerArm = new LowerArm(0xaaaaee);
+let grip: Grip = new Grip(0xaaaaee);
 
 onMounted(() => {
   const canvasContainer = canvasContainerRef.value;
@@ -33,17 +38,38 @@ onMounted(() => {
   window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
 
-  const robotBase = new RobotBase(0xaaaaee);
-  const upperArm = new UpperArm(0xaaaaee);
-  const lowerArm = new LowerArm(0xaaaaee);
-  const grip = new Grip(0xaaaaee);
+  robotBase.addChild(upperArm);
+  upperArm.addChild(lowerArm);
+  lowerArm.addChild(grip);
 
   canvasObject = new CanvasObject(canvas);
   canvasObject.start();
   canvasObject.addObject(robotBase);
-  canvasObject.addObject(upperArm);
-  canvasObject.addObject(lowerArm);
-  canvasObject.addObject(grip);
+  // canvasObject.addObject(upperArm);
+  // canvasObject.addObject(lowerArm);
+  // canvasObject.addObject(grip);
+
+});
+
+
+watch(() => rotationStore.baseRotation, () => {
+  let angle = rotationStore.baseRotation * Math.PI / 180;
+  robotBase.rotation.y = angle;
+});
+
+watch(() => rotationStore.upperArmRotation, () => {
+  let angle = rotationStore.upperArmRotation * Math.PI / 180;
+  upperArm.rotate(angle);
+});
+
+watch(() => rotationStore.lowerArmRotation, () => {
+  let angle = rotationStore.lowerArmRotation * Math.PI / 180;
+  lowerArm.rotate(angle);
+});
+
+watch(() => rotationStore.gripRotation, () => {
+  let angle = rotationStore.gripRotation * Math.PI / 180;
+  grip.rotate(angle);
 });
 
 

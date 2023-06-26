@@ -16,7 +16,7 @@ export class CanvasObject {
     this.camera = new THREE.PerspectiveCamera(75, canvasElement.width / canvasElement.height, 0.1, 1000);
     this.camera.position.z = 50;
     this.camera.position.y = 50;
-    this.camera.position.x = 50;
+    this.camera.position.x = 100;
 
     this.renderer = new THREE.WebGLRenderer({ canvas: canvasElement });
     this.renderer.setSize(canvasElement.width, canvasElement.height);
@@ -28,9 +28,9 @@ export class CanvasObject {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
     this.scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
     directionalLight.castShadow = true;
-    directionalLight.position.set(100, 50, 100);
+    directionalLight.position.set(100, 100, 100);
     this.scene.add(directionalLight);
 
     this.renderer.setClearColor(0x555555);
