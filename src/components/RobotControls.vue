@@ -2,42 +2,54 @@
   <div class="control-panel">
     <div class="control">
       <label for="base-rotation">Base Rotation:</label>
-      <input id="base-rotation" type="range" v-model="baseRotation" min="-180" max="180" step="1" />
+      <input
+        id="base-rotation" 
+        type="range" 
+        v-model="rotationStoreRef.baseRotation" 
+        min="-180" 
+        max="180" 
+        step="1" 
+      />
     </div>
     <div class="control">
       <label for="upper-arm-rotation">Upper Arm Rotation:</label>
-      <input id="upper-arm-rotation" type="range" v-model="upperArmRotation" min="-90" max="90" step="1" />
+      <input 
+        id="upper-arm-rotation" 
+        type="range" 
+        v-model="rotationStoreRef.upperArmRotation" 
+        min="-180" 
+        max="180" 
+        step="1" />
     </div>
     <div class="control">
       <label for="lower-arm-rotation">Lower Arm Rotation:</label>
-      <input id="lower-arm-rotation" type="range" v-model="lowerArmRotation" min="-180" max="0" step="1" />
+      <input 
+        id="lower-arm-rotation" 
+        type="range" 
+        v-model="rotationStoreRef.lowerArmRotation" 
+        min="-180" 
+        max="180" 
+        step="1" />
     </div>
     <div class="control">
       <label for="grip-rotation">Grip Rotation:</label>
-      <input id="grip-rotation" type="range" v-model="gripRotation" min="-90" max="180" step="1" />
+      <input 
+        id="grip-rotation" 
+        type="range" 
+        v-model="rotationStoreRef.gripRotation" 
+        min="-180" 
+        max="180" 
+        step="1" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { reactive } from 'vue';
 import { rotationStore } from '../store/rotationStore.ts';
 
-const baseRotation = ref<number>(rotationStore.baseRotation); 
-const upperArmRotation = ref<number>(rotationStore.upperArmRotation); 
-const lowerArmRotation = ref<number>(rotationStore.lowerArmRotation); 
-const gripRotation = ref<number>(rotationStore.gripRotation);
 
-watch(
-  [baseRotation, upperArmRotation, lowerArmRotation, gripRotation],
-  ([base, upperArm, lowerArm, grip]) => {
-    rotationStore.baseRotation = base;
-    rotationStore.upperArmRotation = upperArm;
-    rotationStore.lowerArmRotation = lowerArm;
-    rotationStore.gripRotation = grip;
-  }
-);
-
+const rotationStoreRef = reactive(rotationStore);
 </script>
 
 <style scoped>

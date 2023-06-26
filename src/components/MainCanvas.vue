@@ -71,31 +71,18 @@ watch(() => rotationStore.gripRotation, () => {
 });
 
 const handleKeyDown = (event: KeyboardEvent) => {
-  event.preventDefault();
   switch (event.key) {
-    case 'ArrowUp':
-      rotationStore.baseRotation += 1;
-      break;
-    case 'ArrowDown':
-      rotationStore.baseRotation -= 1;
-      break;
-    case 'ArrowLeft':
+    case 'a':
       rotationStore.upperArmRotation += 1;
       break;
-    case 'ArrowRight':
+    case 'd':
       rotationStore.upperArmRotation -= 1;
       break;
-    case 'a':
-      rotationStore.lowerArmRotation += 2;
-      break;
-    case 'd':
-      rotationStore.lowerArmRotation -= 2;
-      break;
     case 's':
-      rotationStore.gripRotation += 2;
+      rotationStore.gripRotation += 1;
       break;
     case 'w':
-      rotationStore.gripRotation -= 2;
+      rotationStore.gripRotation -= 1;
       break;
   }
 };
